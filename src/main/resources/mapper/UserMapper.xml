@@ -12,4 +12,30 @@
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="register_date" jdbcType="TIMESTAMP" property="registerDate" />
   </resultMap>
+
+  <select id="queryAll" resultMap="BaseResultMap">
+    select * from user
+  </select>
+
+  <insert id="insertOne" parameterType="hashmap">
+    insert into user (username,password,nick_name,sex,register_date)
+    values (
+    <if test="username!=null || username!='' ">
+      #{username},
+    </if>
+    <if test="password!=null || password!='' ">
+      #{password},
+    </if>
+    <if test="nick_name!=null || nick_name!='' ">
+      #{nick_name},
+    </if>
+    <if test="sex!=null || sex!='' ">
+      #{sex},
+    </if>
+    <if test="register_date!=null || register_date!='' ">
+      #{register_date}
+    </if>
+
+    );
+  </insert>
 </mapper>

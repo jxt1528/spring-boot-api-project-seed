@@ -1,6 +1,7 @@
 package com.company.project.core;
 
 
+import com.company.project.annotation.CountTime;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;
