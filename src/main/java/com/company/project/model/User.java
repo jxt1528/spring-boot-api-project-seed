@@ -8,18 +8,17 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ExcelProperty(value = "Id",index = 0)
     private Integer id;
-    @ExcelProperty(value = "用户名",index = 1)
+    @ExcelProperty(value = "用户名",index = 0)
     private String username;
-    @ExcelProperty(value = "密码",index = 2)
+    @ExcelProperty(value = "密码",index = 1)
     private String password;
-    @ExcelProperty(value = "姓名",index = 3)
+    @ExcelProperty(value = "姓名",index = 2)
     @Column(name = "nick_name")
     private String nickName;
-    @ExcelProperty(value = "性别",index = 4)
+    @ExcelProperty(value = "性别",index = 3)
     private Integer sex;
-    @ExcelProperty(value = "注册日期",index = 5)
+    @ExcelProperty(value = "注册日期",index = 4)
     @Column(name = "register_date")
     private Date registerDate;
 

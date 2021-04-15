@@ -101,7 +101,11 @@ public class UserController {
     }
     @PostMapping("/outExcel")
     @ResponseBody
-    public Result outExcel(HttpServletRequest request ,HttpServletResponse response, @RequestParam("fileSetExcel") MultipartFile file){
+    public Result outExcel(HttpServletRequest request ,HttpServletResponse response, @RequestParam("file") MultipartFile file) throws Exception{
+
+
+
+
         //输入流
         InputStream in = null;
         //文件转换后的list数组
@@ -123,31 +127,25 @@ public class UserController {
             if("xls".equals(fileType)){
                 XSSFWorkbook wb = new XSSFWorkbook(in);//2003+
                 in.close();
-                try {
+
                     if (!userService.isExcelMistakeDataType(wb)) {
                         return ResultGenerator.genFailResult("传入的文件非模板文件");
                     }
                     listOb= userService.getBankListByExcel(wb);
                     logger.info("--------------------"+listOb);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
             }else if ("xlsx".equals(fileType)){
                 XSSFWorkbook wb = new XSSFWorkbook(in); // 2007+
                 in.close();
-                try {
+
                     if (!userService.isExcelMistakeDataType(wb)) {
                         return ResultGenerator.genFailResult("传入的文件非模板文件");
                     }
-                    logger.info("***********"+wb);
-                    XSSFSheet sheetAt = wb.getSheetAt(0);
+                    logger.info("*****wb******"+wb);
 
-                    logger.info("i="+sheetAt);
                     listOb= userService.getBankListByExcel(wb);
-                    logger.info("****************"+listOb);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    logger.info("********listOb********"+listOb);
+
             }else{
                 return  ResultGenerator.genFailResult("上传文件格式不正确，请提交正确的文件格式（*.xls, *.xlsx）");
             }

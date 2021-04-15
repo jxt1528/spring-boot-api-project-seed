@@ -76,18 +76,19 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Override
     public Map<String, Object> setExcelData(ArrayList<ArrayList<Object>> data) {
+        Map<String, Object> map = new HashMap<>();
         ArrayList<HashMap<String, Object>> recordData = new ArrayList<HashMap<String, Object>>();
         int i = 0;
         try {
             for (ArrayList<Object> arrayList : data) {
                 i++;
                 if (arrayList.size() <= 1) {
-                    logger.debug("第" + i + "条数据为空，不导入");
+                    logger.info("第" + i + "条数据为空，不导入");
 
                     continue;
                 }
                 if (arrayList.get(1) == null && "".equals(arrayList.get(1))) {
-                    logger.debug("第" + i + "条数据无macId，导入失败");
+                    logger.info("第" + i + "条数据无macId，导入失败");
                     continue;
                 }
 
@@ -97,7 +98,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
                 oneData.put("nickName", arrayList.get(2));
                 oneData.put("sex", arrayList.get(3));
                 oneData.put("registerDate", arrayList.get(4));
-
 
                 // 添加设备基础信息
                 recordData.add(oneData);
@@ -111,6 +111,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
             return null;
         }
 
-        return null;
+        return map;
     }
 }

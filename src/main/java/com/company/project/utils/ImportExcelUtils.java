@@ -312,11 +312,13 @@ public class ImportExcelUtils {
 				ArrayList<Object> li = new ArrayList<Object>();
 				for (int k = row.getFirstCellNum(); k < row.getLastCellNum(); k++) {
 					cell = row.getCell(k);
+
 					if (cell == null) {
 						li.add(null);
 						continue;
 					}
 					li.add(this.getCellValue(cell));
+
 					// li.add(this.getCellValue(cell));
 				}
 				list.add(li);
